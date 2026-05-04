@@ -15,7 +15,7 @@
 #### Step 0: Make `server` executable
 
 ```bash
-chmod +x server # Linux/macOS only
+chmod +x server # Linux/macOS only. Not needed to do in Windows.
 ```
 
 #### Step 1: Initialize environment and set up dependencies
@@ -33,7 +33,7 @@ chmod +x server # Linux/macOS only
 #### Step 3: Inject root to MySQL
 
 ```bash
-./server --inject-mysql
+./server --inject-mysql # Do this only once.
 ```
 
 #### Step 4: Start server
@@ -44,9 +44,7 @@ chmod +x server # Linux/macOS only
 
 #### Now visit
 
-```url
-http://localhost:8080/
-```
+[http://localhost:8080/](http://localhost:8080/)
 
 or the URL given by Flask.
 
@@ -60,4 +58,4 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
-The URL here is **http://127.0.0.1:8080**
+Here the URL is [http://127.0.0.1:8080](http://127.0.0.1:8080)
