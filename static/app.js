@@ -152,7 +152,17 @@ async function loadHomePage() {
       }
       const html = `
                 <div class="school-info-name">${data.name || "School Name"}</div>
-                <div class="school-info-address">${data.address || "School Address"}</div>
+                <div class="school-info-address">${
+                  data.address[0] +
+                    ", " +
+                    data.address[1] +
+                    "-" +
+                    data.address[2] +
+                    ", " +
+                    data.address[3] +
+                    ", " +
+                    data.address[4] || "School Address"
+                }</div>
                 <div class="school-info-description">${data.description || "School Description"}</div>
                 ${remarksHtml ? `<ul class="school-info-remarks">${remarksHtml}</ul>` : ""}
             `;

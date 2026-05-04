@@ -141,7 +141,6 @@ app: Flask = Flask(__name__)
 @app.route("/api/school/info/")
 def get_school_info():
     try:
-        print("OK...")
         with open(".cache/mysql.user-model.json") as f:
             data = ast.literal_eval(f.read())
         return jsonify(success("Fetch successful.", data=data["info"])), 200
