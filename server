@@ -1,0 +1,59 @@
+#!/usr/bin/bash
+set -e
+
+arg1="$1"
+arg2="$2"
+
+if [[ "$arg1" == "--inject-mysql" ]]; then
+    if ! [[ -e "/usr/bin/mysql" || -e "/usr/local/bin/mysql"]]; then
+        echo "MySQL is not installed. We can't inject SQL for the server."
+        echo "Please set-up MySQL first."
+        exit 404
+    fi
+
+    echo "You need to enter password of the root."
+    mysql -u root -p < .cache/mysql.user-root.sql
+    exit 0
+fi
+
+if [[ "$arg1" == "--start" ]]; then
+    port="$arg2"
+    
+    if "$port" == ""; then
+        port="8080"
+    fi
+
+    if [[ ! -e "./.env/bin/python3" ]]; then
+        echo "Environment not created."
+        echo "Create it by"
+        echo "  ./server --init"
+        exit 404
+    fi
+
+    "./.env/bin/python3" server.py $port
+    exit 0
+fi
+
+if [[ "$arg1" == "--init" ]]; then
+    if ! [[ -e "/usr/bin/python3" || -e "/usr/local/bin/python3" ]]; then
+        echo "Python is not installed. We can't run the server for you."
+        echo "Please install python first."
+        exit 404
+    fi
+
+    python3 -m venv .env
+    "./.env/bin/pip" install -r requirements.txt
+    exit 0
+fi
+
+if [[ "$arg1" == "--configure" ]]; then
+    if [[ ! -e "./.env/bin/python3" ]]; then
+        echo "Environment not created."
+        echo "Create it by"
+        echo "  ./server --init"
+        exit 404
+    fi
+
+    "./.env/bin/python3" configure.py
+    exit 0
+fi

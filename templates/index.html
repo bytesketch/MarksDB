@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarksDB - Student Management System</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">MarksDB</div>
+        <div class="navbar-menu">
+          <a href="#" data-page="home" class="nav-link active">Home</a>
+          <a href="#" data-page="dashboard" class="nav-link">Dashboard</a>
+          <a href="#" data-page="students" class="nav-link">Students</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-container">
+      <section id="home" class="page active">
+        <div class="content-wrapper">
+          <section class="info-section">
+            <h1>Welcome to MarksDB</h1>
+            <div class="school-info-container" id="schoolInfo">
+              <div class="loading">Loading school information...</div>
+            </div>
+          </section>
+
+          <section class="developer-section">
+            <h2>About Developer</h2>
+            <div id="developerInfo" class="developer-card">
+              <div class="loading">Loading developer information...</div>
+            </div>
+          </section>
+
+          <footer class="page-footer">
+            <p>&copy; 2026 MarksDB. A modern student management system.</p>
+          </footer>
+        </div>
+      </section>
+
+      <section id="dashboard" class="page">
+        <div class="content-wrapper">
+          <h1>Dashboard</h1>
+          <div id="dashboardContent" class="dashboard-grid">
+            <div class="loading">Loading dashboard...</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="students" class="page">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h1>Students</h1>
+            <button class="btn btn-primary" id="addStudentBtn">
+              + Add Student
+            </button>
+          </div>
+          <div id="studentsContent" class="students-grid">
+            <div class="loading">Loading students...</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="marks" class="page">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <button class="btn btn-back" id="backToStudents">← Back</button>
+            <h1 id="marksStudentName">Student Marks</h1>
+            <button class="btn btn-primary" id="addMarkBtn">+ Add Mark</button>
+          </div>
+          <div id="marksContent" class="marks-grid">
+            <div class="loading">Loading marks...</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="studentModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="studentModalTitle">Add Student</h2>
+          <button class="modal-close">&times;</button>
+        </div>
+        <form id="studentForm" class="form">
+          <div class="form-group">
+            <label for="srno">SR. No:</label>
+            <input type="number" id="srno" name="srno" required />
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="class">Class:</label>
+            <input type="number" id="class" name="class" required />
+          </div>
+          <div class="form-group">
+            <label for="roll">Roll No:</label>
+            <input type="number" id="roll" name="roll" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="studentModalClose"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="markModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="markModalTitle">Add Mark Record</h2>
+          <button class="modal-close">&times;</button>
+        </div>
+        <form id="markForm" class="form">
+          <div class="form-group">
+            <label for="subject">Subject:</label>
+            <select id="subject" name="subject" required></select>
+          </div>
+          <div class="form-group">
+            <label for="timing">Timing:</label>
+            <select id="timing" name="timing" required></select>
+          </div>
+          <div class="form-group">
+            <label for="max">Max Marks:</label>
+            <input type="number" id="max" name="max" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="obtained">Obtained Marks:</label>
+            <input
+              type="number"
+              id="obtained"
+              name="obtained"
+              step="0.01"
+              required
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" id="markModalClose">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+      <div class="modal-content modal-confirm">
+        <div class="modal-header">
+          <h2>Confirm Delete</h2>
+        </div>
+        <p id="confirmMessage">Are you sure you want to delete this item?</p>
+        <div class="form-actions">
+          <button id="confirmDelete" class="btn btn-danger">Delete</button>
+          <button id="cancelDelete" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
