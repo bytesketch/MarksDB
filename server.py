@@ -27,8 +27,13 @@ error so that we can control later.
 
 """
 class _Connection:
-    def __init__(self, **kwargs: dict[str, object]) -> None:
-        self.connection = sql_connection(**kwargs)
+    def __init__(self, data: dict[str, object]) -> None:
+        self.connection = sql_connection(
+            host=data["host"],
+            user=data["username"],
+            password=data["password"],
+            database=data["database"]
+        )
         self.cursor = self.connection.cursor()
     
     def execute(self, query: str, params: tuple[object, ...] = ()) -> None:
@@ -70,12 +75,7 @@ class Conn:
             self.login = ast.literal_eval(f.read())["login"]
         
     def open(self):
-        return _Connection(
-            host=self.login["host"],
-            user=self.login["username"],
-            password=self.login["password"],
-            database=self.login["database"]
-        )
+        return _Connection(self.login)
 
 db = Conn()
 

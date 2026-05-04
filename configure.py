@@ -71,7 +71,7 @@ def main():
         try:
             remarks.append(prompt(f"Remark {i}"))
             i += 1
-        except Abort, KeyboardInterrupt:
+        except (Abort, KeyboardInterrupt):
             break
     
     data["info"] = {
@@ -95,7 +95,7 @@ GRANT ALL PRIVILEGES ON {database}.* TO '{usrname}'@'{host}';
 if __name__ == "__main__":
     try:
         main()
-    except KeyboardInterrupt, Abort:
+    except (KeyboardInterrupt, Abort):
         print("\nCancelling...")
     except Exception as e:
         print(f"\nAn error caught: {e}")
