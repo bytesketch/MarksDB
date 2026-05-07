@@ -27,7 +27,7 @@ error so that we can control later.
 
 """
 class _Connection:
-    def __init__(self, data: dict[str, object]) -> None:
+    def __init__(self, data):
         self.connection = sql_connection(
             host=data["host"],
             user=data["username"],
@@ -36,25 +36,25 @@ class _Connection:
         )
         self.cursor = self.connection.cursor()
     
-    def execute(self, query: str, params: tuple[object, ...] = ()) -> None:
+    def execute(self, query, params = ()):
         self.cursor.execute(query, params)
         if not query.strip().upper().startswith("SELECT"):
             self.connection.commit()
     
-    def fetchall(self) -> list[tuple[object, ...]]:
+    def fetchall(self):
         return self.cursor.fetchall()
     
-    def fetchone(self) -> tuple[object, ...] | None:
+    def fetchone(self):
         return self.cursor.fetchone()
     
-    def close(self) -> None:
+    def close(self):
         self.cursor.close()
         self.connection.close()
     
-    def __enter__(self) -> _Connection:
+    def __enter__(self):
         return self
     
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is not None:
             self.connection.rollback()
         self.close()
@@ -116,7 +116,7 @@ with db.open() as conn:
         conn.execute(command)
 
 
-app: Flask = Flask(__name__)
+app = Flask(__name__)
 
 """
 === Server logic : API ===

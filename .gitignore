@@ -1,5 +1,6 @@
 .cache/
 .env/
+.vscode/
 
 # === TEMPLATE PYTHON === #
 __pycache__/

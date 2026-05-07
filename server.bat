@@ -58,6 +58,16 @@ if "%arg1%"=="--configure" (
         exit /b 404
     )
 
+    if not exists ".cache" (
+        mkdir .cache
+    )
     ".\.env\Scripts\python.exe" configure.py
     exit /b 0
 )
+
+echo Usage:
+echo "  ./server --init              # Setup environment"
+echo "  ./server --start [port]      # Start server (default: 8080)"
+echo "  ./server --configure         # Run configuration"
+echo "  ./server --inject-mysql      # Inject MySQL schema"
+exit /b 1

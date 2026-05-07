@@ -541,14 +541,17 @@ async function saveMark() {
   try {
     let response;
     if (mode === "add") {
-      response = await fetch(`${API_BASE}/marks/${currentStudent.srno}/add`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(markData),
-      });
+      response = await fetch(
+        `${API_BASE}/api/marks/${currentStudent.srno}/add`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(markData),
+        },
+      );
     } else {
       const recordId = form.dataset.recordId;
-      response = await fetch(`${API_BASE}/marks/${recordId}/update`, {
+      response = await fetch(`${API_BASE}/api/marks/${recordId}/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(markData),
@@ -577,7 +580,7 @@ async function deleteMark(recordId) {
     "Are you sure you want to delete this mark record?",
     async () => {
       try {
-        const response = await fetch(`${API_BASE}/marks/${recordId}/del`, {
+        const response = await fetch(`${API_BASE}/api/marks/${recordId}/del`, {
           method: "POST",
         });
 
